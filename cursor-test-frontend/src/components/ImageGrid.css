@@ -117,4 +117,12 @@
     height: 100vh;
     font-size: 1.5rem;
     color: #666;
+}
+
+.loading-more {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 20px;
+    font-size: 1.2rem;
+    color: #666;
 } 
