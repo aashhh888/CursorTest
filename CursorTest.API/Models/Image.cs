@@ -5,5 +5,6 @@ namespace CursorTest.API.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string ImageUrl { get; set; }
+        public int Box { get; set; }
     }
 } 

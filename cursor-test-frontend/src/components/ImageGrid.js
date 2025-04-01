@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './ImageGrid.css';
+import CardItem from './CardItem';
 
 const ImageGrid = () => {
     // Main state variables 
@@ -78,19 +79,13 @@ const ImageGrid = () => {
     return (
         <div className="image-grid">
             {displayedImages.map((image, index) => {
-                // Check if this is the last image being displayed
                 const isLastElement = displayedImages.length === index + 1;
                 return (
-                    <div 
-                        key={image.id} 
-                        className="image-item"
-                        data-number={`No. ${String(image.id).padStart(3, '0')}`}
-                        // Only add the watcher to the last image in our list
-                        ref={isLastElement ? lastImageElementRef : null}
-                    >
-                        <img src={image.imageUrl} alt={image.title} />
-                        <h3>{image.title}</h3>
-                    </div>
+                    <CardItem
+                        key={image.id}
+                        item={image}
+                        forwardedRef={isLastElement ? lastImageElementRef : null}
+                    />
                 );
             })}
             {/* Show loading indicator when getting more images */}
