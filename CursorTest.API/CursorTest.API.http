@@ -1,6 +1,28 @@
-@CursorTest3.API_HostAddress = http://localhost:5139
+@CursorTest.API_HostAddress = http://localhost:5139
 
-GET {{CursorTest3.API_HostAddress}}/weatherforecast/
+### Get all images
+GET {{CursorTest.API_HostAddress}}/api/images
 Accept: application/json
 
-###
+### Add a new image (example)
+# POST {{CursorTest.API_HostAddress}}/api/images
+# Content-Type: application/json
+#
+# {
+#   "Id": 19,
+#   "Title": "New Pokémon",
+#   "ImageUrl": "https://www.serebii.net/swordshield/pokemon/019.png"
+# }
+
+### Update an image (example)
+# PUT {{CursorTest.API_HostAddress}}/api/images/1
+# Content-Type: application/json
+#
+# {
+#   "Id": 1,
+#   "Title": "Updated Pokémon",
+#   "ImageUrl": "https://www.serebii.net/swordshield/pokemon/001.png"
+# }
+
+### Delete an image (example)
+# DELETE {{CursorTest.API_HostAddress}}/api/images/1
