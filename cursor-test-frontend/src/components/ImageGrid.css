@@ -1,0 +1,69 @@
+.image-grid {
+    /* 
+    This sets up a grid layout with 3 columns, each taking up equal space.
+    The gap between grid items is 20px.
+    The grid is centered horizontally with a maximum width of 1200px.
+    */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.image-item {
+    /* 
+    Each image item is a flex container, aligning its children (image and title) in a column.
+    The item has a white background, rounded corners, and a subtle shadow for a lifted effect.
+    It also has a hover effect that slightly lifts the item.
+    */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.image-item:hover {
+    /* 
+    On hover, the image item moves up slightly to create a 3D effect.
+    */
+    transform: translateY(-5px);
+}
+
+.image-item img {
+    /* 
+    The image takes up the full width of the item and has a fixed height of 300px.
+    The object-fit property ensures the image covers the area without distortion.
+    */
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.image-item h3 {
+    /* 
+    The title is centered below the image with a margin for spacing.
+    It has a slightly larger font size and a dark color for readability.
+    */
+    margin: 10px 0;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.loading {
+    /* 
+    The loading message is centered both vertically and horizontally on the page.
+    It has a larger font size and a gray color.
+    */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 1.5rem;
+    color: #666;
+} 
