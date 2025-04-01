@@ -1,3 +1,10 @@
+.grid-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
 .image-grid {
     /* 
     Grid layout with 3 equally-sized columns:
@@ -9,10 +16,6 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    background-color: #f5f5f5;
 }
 
 .loading {

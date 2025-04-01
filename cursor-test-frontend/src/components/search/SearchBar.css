@@ -1,0 +1,83 @@
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #9575cd;
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filter-count {
+    color: white;
+    font-size: 14px;
+    opacity: 0.9;
+    margin-right: 16px;
+}
+
+.search-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 4px 16px;
+    min-width: 200px;
+}
+
+.search-input {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    width: 100%;
+    padding: 6px 24px 6px 0;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.search-input option {
+    background-color: #9575cd;
+    color: white;
+    padding: 8px;
+    font-size: 14px;
+}
+
+/* Custom dropdown arrow */
+.search-input-container::after {
+    content: '';
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    background: white;
+    clip-path: polygon(50% 75%, 0 25%, 100% 25%);
+    pointer-events: none;
+}
+
+/* Remove default select styling */
+.search-input::-ms-expand {
+    display: none;
+}
+
+/* Style for the dropdown list when opened */
+.search-input:focus {
+    outline: none;
+}
+
+.search-input option:hover,
+.search-input option:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.search-count {
+    color: white;
+    font-size: 14px;
+    opacity: 0.9;
+} 

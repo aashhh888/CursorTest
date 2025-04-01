@@ -1,5 +1,5 @@
 import React from 'react';
-import ImageGrid from './components/ImageGrid';
+import ImageGrid from './components/layout/ImageGrid';
 import './App.css';
 
 function App() {

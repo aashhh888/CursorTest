@@ -1,6 +1,6 @@
 import React from 'react';
-import cardIcon from './card-icon.svg';
 import './CardItem.css';
+import cardIcon from '../card-icon.svg';
 
 const CardItem = ({ item, forwardedRef }) => {
     return (
