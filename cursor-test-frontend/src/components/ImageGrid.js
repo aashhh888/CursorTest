@@ -28,7 +28,11 @@ const ImageGrid = () => {
     return (
         <div className="image-grid">
             {images.map((image) => (
-                <div key={image.id} className="image-item">
+                <div 
+                    key={image.id} 
+                    className="image-item"
+                    data-number={`No. ${String(image.id).padStart(3, '0')}`}
+                >
                     <img src={image.imageUrl} alt={image.title} />
                     <h3>{image.title}</h3>
                 </div>

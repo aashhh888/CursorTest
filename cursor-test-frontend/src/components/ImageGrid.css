@@ -1,8 +1,10 @@
 .image-grid {
     /* 
-    This sets up a grid layout with 3 columns, each taking up equal space.
-    The gap between grid items is 20px.
-    The grid is centered horizontally with a maximum width of 1200px.
+    This creates a grid layout with 3 equally-sized columns.
+    - "grid-template-columns: repeat(3, 1fr)" means 3 columns of equal width
+    - "gap: 20px" adds spacing between the cards
+    - "max-width: 1200px" and "margin: 0 auto" center the grid on the page
+    - "background-color: #f5f5f5" gives a light gray background
     */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -10,55 +12,104 @@
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
+    background-color: #f5f5f5;
 }
 
 .image-item {
     /* 
-    Each image item is a flex container, aligning its children (image and title) in a column.
-    The item has a white background, rounded corners, and a subtle shadow for a lifted effect.
-    It also has a hover effect that slightly lifts the item.
+    This styles each Pokémon card:
+    - "flex-direction: column" stacks the elements (image, title) vertically
+    - "background: #fce4ec" gives a light pink background like a Pokémon card
+    - "border-radius: 15px" creates rounded corners
+    - "box-shadow" adds a subtle shadow for a 3D effect
+    - "position: relative" allows for placing elements (like the header) precisely
     */
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: #fce4ec;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.2s;
+    position: relative;
+}
+
+.image-item:before {
+    /* 
+    This creates the purple header with the Pokémon number and Pokéball icon:
+    - "content: attr(data-number)" displays the Pokémon number (No. 001)
+    - "position: absolute" places it at the top of the card
+    - "background: #b39ddb" gives the purple background color
+    - "color: white" makes the text white
+    - The background-image and related properties add the Pokéball SVG icon
+    */
+    content: attr(data-number);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #b39ddb;
+    color: white;
+    padding: 8px 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    padding-left: 45px; /* Add space for the Pokéball */
+    background-image: url('./pokeball-icon.svg');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 24px;
 }
 
 .image-item:hover {
     /* 
-    On hover, the image item moves up slightly to create a 3D effect.
+    This creates an animation effect when hovering over a card:
+    - "transform: translateY(-5px)" makes the card move up slightly
+    - This gives a nice interactive feel when browsing the Pokémon
     */
     transform: translateY(-5px);
 }
 
 .image-item img {
     /* 
-    The image takes up the full width of the item and has a fixed height of 300px.
-    The object-fit property ensures the image covers the area without distortion.
+    This styles the Pokémon image inside the card:
+    - "width: 100%" makes the image take the full width of the card
+    - "height: 300px" gives all images a consistent height
+    - "object-fit: contain" ensures the image fits without distortion
+    - "padding" adds space around the image
+    - "background-color: #fce4ec" keeps the light pink background behind the image
     */
     width: 100%;
     height: 300px;
-    object-fit: cover;
+    object-fit: contain;
+    padding: 40px 20px 20px 20px;
+    background-color: #fce4ec;
 }
 
 .image-item h3 {
     /* 
-    The title is centered below the image with a margin for spacing.
-    It has a slightly larger font size and a dark color for readability.
+    This styles the Pokémon name at the bottom of the card:
+    - "background: #b39ddb" creates the purple background that matches the header
+    - "color: white" makes the text white
+    - "border-radius: 0 0 15px 15px" rounds the bottom corners to match the card
+    - "text-align: center" centers the text
     */
-    margin: 10px 0;
+    margin: 0;
+    padding: 10px 15px;
     font-size: 1.2rem;
-    color: #333;
+    color: white;
+    text-align: center;
+    background: #b39ddb;
+    border-radius: 0 0 15px 15px;
 }
 
 .loading {
     /* 
-    The loading message is centered both vertically and horizontally on the page.
-    It has a larger font size and a gray color.
+    This styles the loading message shown while fetching the Pokémon:
+    - "display: flex", "justify-content: center", and "align-items: center" center the text
+    - "height: 100vh" makes it take the full screen height
+    - "font-size: 1.5rem" and "color: #666" style the text
     */
     display: flex;
     justify-content: center;
