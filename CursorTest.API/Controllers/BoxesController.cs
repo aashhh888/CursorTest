@@ -19,17 +19,9 @@ namespace CursorTest.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Box>> GetBoxes()
         {
-            // Read unique boxes from images.csv
-            var images = _csvService.ReadCsv<Image>("images.csv");
-            var uniqueBoxes = new HashSet<int>(images.Select(i => i.Box));
-
-            // Update boxes.csv if needed
-            var boxes = uniqueBoxes.Select(id => new Box { Id = id, Name = $"Box {id}" })
-                                 .OrderBy(b => b.Id)
-                                 .ToList();
+            // Read boxes from boxes.csv instead of generating them
+            var boxes = _csvService.ReadCsv<Box>("boxes.csv").ToList();
             
-            _csvService.WriteCsv("boxes.csv", boxes);
-
             return Ok(boxes);
         }
     }
