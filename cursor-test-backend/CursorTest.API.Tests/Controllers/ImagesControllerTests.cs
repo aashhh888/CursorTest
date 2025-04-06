@@ -15,6 +15,7 @@ namespace CursorTest.API.Tests.Controllers
         private Mock<ICsvService> _mockCsvService;
         private ImagesController _controller;
         private List<Image> _testImages;
+        private List<Collection> _testCollections;
 
         [SetUp]
         public void Setup()
@@ -25,10 +26,18 @@ namespace CursorTest.API.Tests.Controllers
             // Setup test data
             _testImages = new List<Image>
             {
-                new Image { Id = 1, Title = "Image1", Box = 1, ImageUrl = "https://example.com/image1.jpg" },
-                new Image { Id = 2, Title = "Image2", Box = 1, ImageUrl = "https://example.com/image2.jpg" },
-                new Image { Id = 3, Title = "Image3", Box = 2, ImageUrl = "https://example.com/image3.jpg" },
-                new Image { Id = 4, Title = "Image4", Box = 2, ImageUrl = "https://example.com/image4.jpg" }
+                new Image { Id = 1, Title = "Image1", ImageUrl = "https://example.com/image1.jpg" },
+                new Image { Id = 2, Title = "Image2", ImageUrl = "https://example.com/image2.jpg" },
+                new Image { Id = 3, Title = "Image3", ImageUrl = "https://example.com/image3.jpg" },
+                new Image { Id = 4, Title = "Image4", ImageUrl = "https://example.com/image4.jpg" }
+            };
+
+            _testCollections = new List<Collection>
+            {
+                new Collection { Id = 1, ImageId = 1, Box = 1 },
+                new Collection { Id = 2, ImageId = 2, Box = 1 },
+                new Collection { Id = 3, ImageId = 3, Box = 2 },
+                new Collection { Id = 4, ImageId = 4, Box = 2 }
             };
         }
 
@@ -39,6 +48,8 @@ namespace CursorTest.API.Tests.Controllers
             var parameters = new PaginationParameters { PageNumber = 1, PageSize = 10 };
             _mockCsvService.Setup(s => s.ReadCsv<Image>("images.csv"))
                 .Returns(_testImages);
+            _mockCsvService.Setup(s => s.ReadCsv<Collection>("collection.csv"))
+                .Returns(_testCollections);
 
             // Act
             var result = _controller.GetImages(parameters);
@@ -46,7 +57,7 @@ namespace CursorTest.API.Tests.Controllers
             // Assert
             Assert.That(result.Result, Is.TypeOf<OkObjectResult>());
             var okResult = result.Result as OkObjectResult;
-            var response = okResult.Value as PagedResponse<Image>;
+            var response = okResult.Value as PagedResponse<ImageDto>;
             Assert.That(response.Data.Count(), Is.EqualTo(4));
             Assert.That(response.TotalCount, Is.EqualTo(4));
         }
@@ -58,6 +69,8 @@ namespace CursorTest.API.Tests.Controllers
             var parameters = new PaginationParameters { PageNumber = 1, PageSize = 10, BoxFilter = 1 };
             _mockCsvService.Setup(s => s.ReadCsv<Image>("images.csv"))
                 .Returns(_testImages);
+                _mockCsvService.Setup(s => s.ReadCsv<Collection>("collection.csv"))
+                .Returns(_testCollections);
 
             // Act
             var result = _controller.GetImages(parameters);
@@ -65,7 +78,7 @@ namespace CursorTest.API.Tests.Controllers
             // Assert
             Assert.That(result.Result, Is.TypeOf<OkObjectResult>());
             var okResult = result.Result as OkObjectResult;
-            var response = okResult.Value as PagedResponse<Image>;
+            var response = okResult.Value as PagedResponse<ImageDto>;
             Assert.That(response.Data.Count(), Is.EqualTo(2));
             Assert.That(response.TotalCount, Is.EqualTo(2));
             Assert.That(response.Data.All(i => i.Box == 1), Is.True);
@@ -78,6 +91,8 @@ namespace CursorTest.API.Tests.Controllers
             var parameters = new PaginationParameters { PageNumber = 2, PageSize = 2 };
             _mockCsvService.Setup(s => s.ReadCsv<Image>("images.csv"))
                 .Returns(_testImages);
+            _mockCsvService.Setup(s => s.ReadCsv<Collection>("collection.csv"))
+                .Returns(_testCollections);
 
             // Act
             var result = _controller.GetImages(parameters);
@@ -85,7 +100,7 @@ namespace CursorTest.API.Tests.Controllers
             // Assert
             Assert.That(result.Result, Is.TypeOf<OkObjectResult>());
             var okResult = result.Result as OkObjectResult;
-            var response = okResult.Value as PagedResponse<Image>;
+            var response = okResult.Value as PagedResponse<ImageDto>;
             Assert.That(response.Data.Count(), Is.EqualTo(2));
             Assert.That(response.TotalCount, Is.EqualTo(4));
             Assert.That(response.PageNumber, Is.EqualTo(2));

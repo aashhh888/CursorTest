@@ -17,9 +17,30 @@ namespace CursorTest.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<PagedResponse<Image>> GetImages([FromQuery] PaginationParameters parameters)
+        public ActionResult<PagedResponse<ImageDto>> GetImages([FromQuery] PaginationParameters parameters)
         {
-            var allImages = _csvService.ReadCsv<Image>("images.csv");
+            var images = _csvService.ReadCsv<Image>("images.csv");
+            var collections = _csvService.ReadCsv<Collection>("collection.csv");
+            
+            // Join the data from both CSVs
+            var allImages = collections.Join(
+                images,
+                collection => collection.ImageId,
+                img => img.Id,
+                (collection, img) => new ImageDto
+                {
+                    Id = collection.Id,
+                    Title = img.Title,
+                    ImageUrl = img.ImageUrl,
+                    Box = collection.Box,
+                    HP = collection.HP,
+                    Atk = collection.Atk,
+                    Def = collection.Def,
+                    SPAtk = collection.SPAtk,
+                    SPDef = collection.SPDef,
+                    Speed = collection.Speed
+                }
+            ).ToList();
             
             // Apply box filtering if specified
             if (parameters.BoxFilter.HasValue)
@@ -35,7 +56,7 @@ namespace CursorTest.API.Controllers
                 .Take(parameters.PageSize)
                 .ToList();
 
-            var response = new PagedResponse<Image>(
+            var response = new PagedResponse<ImageDto>(
                 pagedImages,
                 parameters.PageNumber,
                 parameters.PageSize,

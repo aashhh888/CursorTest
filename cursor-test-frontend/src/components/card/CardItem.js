@@ -1,8 +1,18 @@
 import React from 'react';
 import './CardItem.css';
 import cardIcon from '../card-icon.svg';
+import StatsDisplay from './StatsDisplay';
 
 const CardItem = ({ item, forwardedRef }) => {
+    const stats = {
+        hp: item.hp,
+        atk: item.atk,
+        def: item.def,
+        spAtk: item.spAtk,
+        spDef: item.spDef,
+        speed: item.speed
+    };
+
     return (
         <div 
             className="card-item"
@@ -14,6 +24,7 @@ const CardItem = ({ item, forwardedRef }) => {
                 <span className="box-number">Box {item.box}</span>
             </div>
             <img src={item.imageUrl} alt={item.title} className="item-image" />
+            <StatsDisplay stats={stats} />
             <h3 className="item-title">{item.title}</h3>
         </div>
     );
